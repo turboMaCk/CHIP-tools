@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/usr/bin/env bash
 
 TIMEOUT=30
 FEL=${FEL:-sunxi-fel}
@@ -15,7 +15,7 @@ nand_writesize=4000
 nand_oobsize=680
 
 if [[ -z ${CHECK_DEPS} ]]; then
-  
+
   for TOOL in ${TOOLS[@]}; do
     if [[ -z $(which $TOOL) ]]; then
       echo "  Error: Unable to locate $TOOL utility."
@@ -24,7 +24,7 @@ if [[ -z ${CHECK_DEPS} ]]; then
       exit 1
     fi
   done
-  
+
 fi
 
 #------------------------------------------------------------
@@ -168,7 +168,7 @@ flash_images() {
 
   echo "echo Configuring Video Mode" >> $ubootcmds
   if [ "$FLAVOR" = "pocketchip" ]; then
-  
+
     echo "setenv clear_fastboot 'i2c mw 0x34 0x4 0x00 4;'" >> $ubootcmds
     echo "setenv write_fastboot 'i2c mw 0x34 0x4 66 1; i2c mw 0x34 0x5 62 1; i2c mw 0x34 0x6 30 1; i2c mw 0x34 0x7 00 1'" >> $ubootcmds
     echo "setenv test_fastboot 'i2c read 0x34 0x4 4 0x80200000; if itest.s *0x80200000 -eq fb0; then echo (Fastboot); i2c mw 0x34 0x4 0x00 4; fastboot 0; fi'" >> $ubootcmds

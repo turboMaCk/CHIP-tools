@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 SPL=$1
 UBOOT=$2
